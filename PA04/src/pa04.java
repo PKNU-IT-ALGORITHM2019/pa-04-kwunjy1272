@@ -81,16 +81,13 @@ public class pa04 {
 			e.printStackTrace();
 		}
 	}
-	public static void timeSort() {
-		//매개변수가 잘못된거같음
+	private static void timeSort() {
 		Arrays.sort(lowData, data.timeComparator);
 	}
-
-	public static void ipSort() {
+	private static void ipSort() {
 		Arrays.sort(lowData, data.ipComparator);
 	}
-
-	public static void print() {
+	private static void print() {
 		int j = 0;
 		while (j <i) {
 			System.out.println(j);
