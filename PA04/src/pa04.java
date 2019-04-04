@@ -90,7 +90,6 @@ public class pa04 {
 	private static void print() {
 		int j = 0;
 		while (j <i) {
-			System.out.println(j);
 			System.out.println("IP: " + lowData[j].ip);
 			System.out.println("Time: " + lowData[j].time);
 			System.out.println("URL: " + lowData[j].url);
