@@ -11,9 +11,7 @@ public class pa04 {
 	static int i = 0;
 	public static void main(String[] args) {
 		action();
-
 	}
-
 	private static void action() {
 		Scanner sc = new Scanner(System.in);
 
@@ -31,15 +29,12 @@ public class pa04 {
 					ipSort();
 				}
 			}
-
 			else if (command[0].equals("print"))
 				print();
-
 			else if (command[0].equals("exit"))
 				break;
 		}
 	}
-
 	private static void read(String fileName) {
 		try {
 			File csv = new File(fileName);
@@ -65,9 +60,9 @@ public class pa04 {
 				
 				//시간비교를 하기위해 년,월,일,시,분,초 순서로 데이터 병합
 				String []dfTime = d[1].split("/|:");
-				//년월일
+				//년,월,일
 				String strYear = dfTime[2]+dfTime[1]+dfTime[0];
-				//시분초
+				//시,분,초
 				String strHour = dfTime[3]+dfTime[4]+dfTime[5];		
 				int year = Integer.parseInt(strYear);
 				int hour = Integer.parseInt(strHour);

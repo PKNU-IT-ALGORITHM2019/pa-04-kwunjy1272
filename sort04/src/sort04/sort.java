@@ -1,7 +1,6 @@
 package sort04;
-import java.io.File;
+
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
 
 public class sort {
@@ -11,10 +10,9 @@ public class sort {
 	static double[][] time = new double[2][7];
 
 	static public void main(String[] args) {
-		String[] sort = { "Heap   ","Library" };
+		String[] sort = { "Heap   ", "Library" };
 		System.out.println("           Random1000 Reverse1000 Random10000 Reverse10000 Random100000 Reverse100000");
 		print();
-		//quick1 overflow
 		for (int i = 0; i < 2; i++) {
 			System.out.print(sort[i] + "   ");
 			for (int j = 0; j < 6; j++) {
@@ -32,14 +30,16 @@ public class sort {
 		else
 			n = 100000;
 		Random ran = new Random();
-		arr = new int[n];
+		arr = new int[n + 1];
+
 		if (x % 2 == 1) {
-			for (int i = 0; i < n; i++) {
-				arr[i] = n - i;
+			for (int i = 1; i <= n; i++) {
+				arr[i] = n - i + 1;
 			}
-		} else {
-			for (int i = 0; i < n; i++)
-				arr[i] = ran.nextInt(n);
+		} else if (x % 2 == 0) {
+			for (int i = 1; i <= n; i++) {
+				arr[i] = ran.nextInt(n) + 1;
+			}
 		}
 	}
 
@@ -49,11 +49,19 @@ public class sort {
 			if (j % 2 == 0) {
 				for (int k = 0; k < 10; k++) {
 					init(j);
-					buildHeap();
+					heapSort();
+					for (int q = 1; q < 10; q++) {
+						System.out.print(arr[q] + " ");
+					}
+					System.out.println("");
 				}
 			} else {
 				init(j);
-				buildHeap();
+				heapSort();
+				for (int q = 1; q < 10; q++) {
+					System.out.print(arr[q] + " ");
+				}
+				System.out.println("");
 			}
 			long end = System.currentTimeMillis();
 			double t = (end - start) / 1000.0;
@@ -75,28 +83,43 @@ public class sort {
 			time[1][j] = t;
 		}
 	}
-	public static void maxHeapify(int index) {
-		if(index*2 >arr.length)
-			return;
-		else {
-			int k = index*2+1;
-			if(arr[index]>=arr[k])
-				return;
-			swap(index,k);
-			maxHeapify(k);
-		}
-		
-	}
-	public static void buildHeap() {
-		 for(int i=0;i<(n/2);i++) {
-			 maxHeapify(i);
-		 }
-	}
-
 
 	public static void swap(int a, int b) {
 		int tmp = arr[a];
 		arr[a] = arr[b];
 		arr[b] = tmp;
+	}
+
+	public static void maxHeapify(int i, int heapSize) {
+
+		int k = 2 * i;
+		if (2 * i > heapSize)
+			return;
+
+		if (heapSize >= i * 2 + 1) {
+			if (arr[2 * i] < arr[2 * i + 1])
+				k = 2 * i + 1;
+		}
+		if (arr[i] >= arr[k])
+			return;
+		swap(i, k);
+		maxHeapify(k, heapSize);
+	}
+
+	public static void buildHeap(int heapSize) {
+
+		for (int i = (heapSize / 2); i > 0; i--) {
+			maxHeapify(i, heapSize);
+		}
+	}
+
+	public static void heapSort() {
+		int heapSize = arr.length - 1;
+		buildHeap(heapSize);
+		for (int i = heapSize; i > 1; i--) {
+			swap(i, 1);
+			heapSize -= 1;
+			maxHeapify(1, heapSize);
+		}
 	}
 }

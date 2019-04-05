@@ -16,24 +16,18 @@ public class data {
 		this.Year = Year;
 		this.Hour = Hour;
 	}
-
 	public static Comparator<data> timeComparator = new Comparator<data>() {
 		public int compare(data d1, data d2) {
 			// 년월일 비교
-//			return d1.strYear-d2.strYear;
 			if (d1.Year == d2.Year) {
-				//System.out.println(d1.Hour - d2.Hour);
 				return d1.Hour - d2.Hour;
 			} else {
-			//	System.out.println(d1.Year - d2.Year);
 				return d1.Year - d2.Year;
 			}
 		}
 	};
-
 	public static Comparator<data> ipComparator = new Comparator<data>() {
 		public int compare(data d1, data d2) {
-			//System.out.println(d1.Year - d2.Year);
 			return d1.ip.compareTo(d2.ip);
 		}
 	};
